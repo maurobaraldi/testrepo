@@ -1,5 +1,5 @@
 #!/bin/bash
-desc="Commit description: " 
+desc="Commit description: update..." 
 git add . && \
 git add -u && \
 git commit -m "$desc" && \

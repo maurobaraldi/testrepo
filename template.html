@@ -1,0 +1,285 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NFTC</title>
+<style>
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  /*background: #596283;
+  font: 14px Optima, 'roboto', sans-serif;*/
+  border: none;
+  width: 100%;
+  height:100%;
+  overflow-x: hidden;
+}
+
+body {
+  display: flex;
+  align-items: center;
+}
+
+.tabs {
+  margin: 0px 20px;
+  position: relative;
+  /*background: #EFF1E4;*/
+  box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.2);
+  width: 100%;
+}
+
+.tabs nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  background: #AD9897;
+  color: #6C5D5D;
+  text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.2);
+  width: 150px;
+}
+
+.tabs nav a {
+  padding: 20px 0px;
+  text-align: center;
+  width: 100%;
+  cursor: pointer;
+}
+
+.tabs nav a:hover,
+.tabs nav a.selected {
+  background: #6C5D5D;
+  color: #AD9897;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+.tabs .content {
+  padding: 20px 0px;
+  position: absolute;
+  top: 0px;
+  left: 150px;
+  width: 0px;
+  color: #6C5D5D;
+  /*height: 100%;*/
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity 0.1s linear 0s;
+}
+
+.tabs .content.visible {
+  padding: 20px;
+  width: calc(100% - 150px);
+  overflow: scroll;
+  opacity: 1;
+}
+
+.tabs .content p { padding-bottom: 2px; }
+
+.tabs .content p:last-of-type { padding-bottom: 0px; }
+
+/* NFTC Styles */
+
+.title {
+    font-family: Verdana, Geneva, sans-serif;
+    font-size: 12pt;
+    color: #828282;
+    overflow: hidden;
+}
+
+.subtext {
+    font-family: Verdana, Geneva, sans-serif;
+    font-size: 8pt;
+    color: #828282;
+}
+</style>
+</head>
+
+<body>
+
+<div class="tabs">
+  
+  <nav>
+    {% for article in articles %}
+    <a>{{ article.get('source') }}</a>
+    {% endfor %}
+  </nav>
+  {% for article in articles %}
+  <div class="content">
+    <table border="0" cellpadding="0" cellspacing="0">
+      <tbody>
+        {% for item in article['items'] %}
+        <tr>
+          <td class="title">
+              <a href="{{ item['link'] }}" rel="noreferrer">{{ item['title'] }}</a>
+          </td>
+        </tr>
+        <tr>
+          <td class="subtext">
+            <span>by <a href="user?id=mfiguiere">{{ article.get('source') }}</a> at {{ item['date'] }}</span>
+          </td>
+        </tr>
+        <tr class="spacer" style="height:5px"></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% endfor %}
+  <!--<nav> <a>Tab #1</a> <a>Tab #2</a> <a>Tab #3</a> <a>Tab #2</a> <a>Tab #3</a> <a>Tab #2</a> <a>Tab #3</a> </nav>-->
+  <!--<div class="content">
+    <table border="0" cellpadding="0" cellspacing="0">
+      <tbody>
+        <tr>
+          <td class="title">
+              <a href="https://www.sec.gov/news/press-release/2023-139" rel="noreferrer">SEC Adopts Rules on Public Company Cybersecurity Disclosures</a>
+          </td>
+        </tr>
+        <tr>
+          <td class="subtext">
+            <span>by <a href="user?id=mfiguiere">mfiguiere</a> at 1 day ago</span>
+          </td>
+        </tr>
+        <tr class="spacer" style="height:5px"></tr>
+        <tr>
+          <td class="title">
+              <a href="https://www.sec.gov/news/press-release/2023-139" rel="noreferrer">SEC Adopts Rules on Public Company Cybersecurity Disclosures</a>
+            </span>
+          </td>
+        </tr>
+        <tr>
+          <td class="subtext">
+            <span>by <a href="user?id=mfiguiere">mfiguiere</a> at 1 day ago</span>
+            </span>
+          </td>
+        </tr>
+        <tr class="spacer" style="height:5px"></tr>
+        <tr>
+          <td class="title">
+              <a href="https://www.sec.gov/news/press-release/2023-139" rel="noreferrer">SEC Adopts Rules on Public Company Cybersecurity Disclosures</a>
+          </td>
+        </tr>
+        <tr>
+          <td class="subtext">
+            <span>by <a href="user?id=mfiguiere">mfiguiere</a> at 1 day ago</span>
+          </td>
+        </tr>
+        <tr class="spacer" style="height:5px"></tr>
+        <tr>
+          <td class="title">
+              <a href="https://www.sec.gov/news/press-release/2023-139" rel="noreferrer">SEC Adopts Rules on Public Company Cybersecurity Disclosures</a>
+            </span>
+          </td>
+        </tr>
+        <tr>
+          <td class="subtext">
+            <span>by <a href="user?id=mfiguiere">mfiguiere</a> at 1 day ago</span>
+            </span>
+          </td>
+        </tr>
+        <tr class="spacer" style="height:5px"></tr>
+        <tr>
+          <td class="title">
+              <a href="https://www.sec.gov/news/press-release/2023-139" rel="noreferrer">SEC Adopts Rules on Public Company Cybersecurity Disclosures</a>
+          </td>
+        </tr>
+        <tr>
+          <td class="subtext">
+            <span>by <a href="user?id=mfiguiere">mfiguiere</a> at 1 day ago</span>
+          </td>
+        </tr>
+        <tr class="spacer" style="height:5px"></tr>
+        <tr>
+          <td class="title">
+              <a href="https://www.sec.gov/news/press-release/2023-139" rel="noreferrer">SEC Adopts Rules on Public Company Cybersecurity Disclosures</a>
+            </span>
+          </td>
+        </tr>
+        <tr>
+          <td class="subtext">
+            <span>by <a href="user?id=mfiguiere">mfiguiere</a> at 1 day ago</span>
+            </span>
+          </td>
+        </tr>
+        <tr class="spacer" style="height:5px"></tr>
+        <tr>
+          <td class="title">
+              <a href="https://www.sec.gov/news/press-release/2023-139" rel="noreferrer">SEC Adopts Rules on Public Company Cybersecurity Disclosures</a>
+          </td>
+        </tr>
+        <tr>
+          <td class="subtext">
+            <span>by <a href="user?id=mfiguiere">mfiguiere</a> at 1 day ago</span>
+          </td>
+        </tr>
+        <tr class="spacer" style="height:5px"></tr>
+        <tr>
+          <td class="title">
+              <a href="https://www.sec.gov/news/press-release/2023-139" rel="noreferrer">SEC Adopts Rules on Public Company Cybersecurity Disclosures</a>
+            </span>
+          </td>
+        </tr>
+        <tr>
+          <td class="subtext">
+            <span>by <a href="user?id=mfiguiere">mfiguiere</a> at 1 day ago</span>
+            </span>
+          </td>
+        </tr>
+        <tr class="spacer" style="height:5px"></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="content">
+    <p>Content #1</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas id ultricies lorem. Donec mattis ornare eros, eget hendrerit est porttitor nec. Aenean tristique massa vel nunc lobortis venenatis. Integer sit amet faucibus dolor, vitae iaculis ex. Sed blandit libero ut ante facilisis, ac imperdiet nibh mollis. Suspendisse eget leo suscipit, malesuada metus at, semper libero. Aliquam neque libero, fermentum id bibendum eu, feugiat consequat leo. Vestibulum ut purus et libero pulvinar mollis. Morbi dapibus varius ipsum eu tristique. Donec tortor justo, tincidunt malesuada nunc sed, ornare viverra eros. Nullam et massa ultrices, vulputate neque at, blandit velit. Nunc ultricies at quam vitae tempor. Quisque maximus fringilla arcu, vel sollicitudin dui luctus ac.</p>
+    <p>Sed vitae consectetur urna. Aenean facilisis vitae massa quis auctor. Ut at ullamcorper magna. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et venenatis justo. Vivamus feugiat purus sit amet mi tincidunt, id egestas erat sodales. Vivamus dapibus rhoncus feugiat. Quisque pulvinar eu est vitae facilisis. Maecenas ac vestibulum lectus, in auctor turpis. In ultrices massa eget finibus volutpat. Nam eu nibh quis purus euismod eleifend. Fusce quis mattis erat. Praesent aliquet urna non imperdiet condimentum. Praesent a venenatis tortor. Donec porttitor enim nec facilisis volutpat.</p>
+  </div>
+  <div class="content">
+    <p>Content #2</p>
+    <p>Ut molestie, neque ac malesuada aliquet, orci ligula ornare lorem, et sagittis diam dolor id odio. Maecenas blandit dolor nec tincidunt vulputate. Proin ultrices dui vulputate ullamcorper molestie. Sed non orci id tortor commodo molestie. Curabitur lectus lacus, iaculis eu quam nec, congue rutrum felis. Morbi rhoncus metus a diam mattis, vel lacinia lectus ultricies. Quisque aliquet magna justo, quis pretium purus vulputate sit amet. Vivamus vehicula nisl eu sollicitudin efficitur. Curabitur egestas, felis vel tempus efficitur, felis nibh fermentum nulla, at gravida risus mauris sed sapien. Donec lobortis mi convallis tortor iaculis, sit amet vulputate libero mollis. Cras sagittis ligula eget est sodales tempor.</p>
+  </div>
+  <div class="content">
+    <p>Content #1</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas id ultricies lorem. Donec mattis ornare eros, eget hendrerit est porttitor nec. Aenean tristique massa vel nunc lobortis venenatis. Integer sit amet faucibus dolor, vitae iaculis ex. Sed blandit libero ut ante facilisis, ac imperdiet nibh mollis. Suspendisse eget leo suscipit, malesuada metus at, semper libero. Aliquam neque libero, fermentum id bibendum eu, feugiat consequat leo. Vestibulum ut purus et libero pulvinar mollis. Morbi dapibus varius ipsum eu tristique. Donec tortor justo, tincidunt malesuada nunc sed, ornare viverra eros. Nullam et massa ultrices, vulputate neque at, blandit velit. Nunc ultricies at quam vitae tempor. Quisque maximus fringilla arcu, vel sollicitudin dui luctus ac.</p>
+    <p>Sed vitae consectetur urna. Aenean facilisis vitae massa quis auctor. Ut at ullamcorper magna. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et venenatis justo. Vivamus feugiat purus sit amet mi tincidunt, id egestas erat sodales. Vivamus dapibus rhoncus feugiat. Quisque pulvinar eu est vitae facilisis. Maecenas ac vestibulum lectus, in auctor turpis. In ultrices massa eget finibus volutpat. Nam eu nibh quis purus euismod eleifend. Fusce quis mattis erat. Praesent aliquet urna non imperdiet condimentum. Praesent a venenatis tortor. Donec porttitor enim nec facilisis volutpat.</p>
+  </div>
+  <div class="content">
+    <p>Content #2</p>
+    <p>Ut molestie, neque ac malesuada aliquet, orci ligula ornare lorem, et sagittis diam dolor id odio. Maecenas blandit dolor nec tincidunt vulputate. Proin ultrices dui vulputate ullamcorper molestie. Sed non orci id tortor commodo molestie. Curabitur lectus lacus, iaculis eu quam nec, congue rutrum felis. Morbi rhoncus metus a diam mattis, vel lacinia lectus ultricies. Quisque aliquet magna justo, quis pretium purus vulputate sit amet. Vivamus vehicula nisl eu sollicitudin efficitur. Curabitur egestas, felis vel tempus efficitur, felis nibh fermentum nulla, at gravida risus mauris sed sapien. Donec lobortis mi convallis tortor iaculis, sit amet vulputate libero mollis. Cras sagittis ligula eget est sodales tempor.</p>
+  </div>
+  <div class="content">
+    <p>Content #1</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas id ultricies lorem. Donec mattis ornare eros, eget hendrerit est porttitor nec. Aenean tristique massa vel nunc lobortis venenatis. Integer sit amet faucibus dolor, vitae iaculis ex. Sed blandit libero ut ante facilisis, ac imperdiet nibh mollis. Suspendisse eget leo suscipit, malesuada metus at, semper libero. Aliquam neque libero, fermentum id bibendum eu, feugiat consequat leo. Vestibulum ut purus et libero pulvinar mollis. Morbi dapibus varius ipsum eu tristique. Donec tortor justo, tincidunt malesuada nunc sed, ornare viverra eros. Nullam et massa ultrices, vulputate neque at, blandit velit. Nunc ultricies at quam vitae tempor. Quisque maximus fringilla arcu, vel sollicitudin dui luctus ac.</p>
+    <p>Sed vitae consectetur urna. Aenean facilisis vitae massa quis auctor. Ut at ullamcorper magna. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et venenatis justo. Vivamus feugiat purus sit amet mi tincidunt, id egestas erat sodales. Vivamus dapibus rhoncus feugiat. Quisque pulvinar eu est vitae facilisis. Maecenas ac vestibulum lectus, in auctor turpis. In ultrices massa eget finibus volutpat. Nam eu nibh quis purus euismod eleifend. Fusce quis mattis erat. Praesent aliquet urna non imperdiet condimentum. Praesent a venenatis tortor. Donec porttitor enim nec facilisis volutpat.</p>
+  </div>
+  <div class="content">
+    <p>Content #2</p>
+    <p>Ut molestie, neque ac malesuada aliquet, orci ligula ornare lorem, et sagittis diam dolor id odio. Maecenas blandit dolor nec tincidunt vulputate. Proin ultrices dui vulputate ullamcorper molestie. Sed non orci id tortor commodo molestie. Curabitur lectus lacus, iaculis eu quam nec, congue rutrum felis. Morbi rhoncus metus a diam mattis, vel lacinia lectus ultricies. Quisque aliquet magna justo, quis pretium purus vulputate sit amet. Vivamus vehicula nisl eu sollicitudin efficitur. Curabitur egestas, felis vel tempus efficitur, felis nibh fermentum nulla, at gravida risus mauris sed sapien. Donec lobortis mi convallis tortor iaculis, sit amet vulputate libero mollis. Cras sagittis ligula eget est sodales tempor.</p>
+  </div>-->
+</div>
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script> 
+<script>
+$(function() {
+  $('.tabs nav a').on('click', function() {
+    show_content($(this).index());
+  });
+  
+  show_content(0);
+
+  function show_content(index) {
+    // Make the content visible
+    $('.tabs .content.visible').removeClass('visible');
+    $('.tabs .content:nth-of-type(' + (index + 1) + ')').addClass('visible');
+
+    // Set the tab to selected
+    $('.tabs nav a.selected').removeClass('selected');
+    $('.tabs nav a:nth-of-type(' + (index + 1) + ')').addClass('selected');
+  }
+});
+</script>
+</body>
+</html>
